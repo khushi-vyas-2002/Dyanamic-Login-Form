@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Login Form</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f0f4f8;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus {
+      border-color: #007bff;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background: #007bff;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-btn:hover {
+      background: #0056b3;
+    }
+
+    @media (max-width: 480px) {
+      .form-container {
+        margin: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    const formContainer = document.createElement('div');
+    formContainer.className = 'form-container';
+
+    const heading = document.createElement('h2');
+    heading.textContent = 'Login';
+
+    const emailGroup = document.createElement('div');
+    emailGroup.className = 'form-group';
+
+    const emailLabel = document.createElement('label');
+    emailLabel.textContent = 'Email:';
+    const emailInput = document.createElement('input');
+    emailInput.type = 'email';
+    emailInput.id = 'email';
+
+    const emailError = document.createElement('div');
+    emailError.className = 'error';
+
+    emailGroup.appendChild(emailLabel);
+    emailGroup.appendChild(emailInput);
+    emailGroup.appendChild(emailError);
+
+
+    const passwordGroup = document.createElement('div');
+    passwordGroup.className = 'form-group';
+
+    const passwordLabel = document.createElement('label');
+    passwordLabel.textContent = 'Password:';
+    const passwordInput = document.createElement('input');
+    passwordInput.type = 'password';
+    passwordInput.id = 'password';
+
+    const passwordError = document.createElement('div');
+    passwordError.className = 'error';
+
+    passwordGroup.appendChild(passwordLabel);
+    passwordGroup.appendChild(passwordInput);
+    passwordGroup.appendChild(passwordError);
+
+
+    const loginButton = document.createElement('button');
+    loginButton.textContent = 'Login';
+    loginButton.className = 'login-btn';
+
+    formContainer.appendChild(heading);
+    formContainer.appendChild(emailGroup);
+    formContainer.appendChild(passwordGroup);
+    formContainer.appendChild(loginButton);
+
+    document.body.appendChild(formContainer);
+
+    loginButton.addEventListener('click', () => {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      emailError.textContent = '';
+      passwordError.textContent = '';
+
+      let valid = true;
+
+      if (!email) {
+        emailError.textContent = 'Email is required.';
+        valid = false;
+      } else if (!/\S+@\S+\.\S+/.test(email)) {
+        emailError.textContent = 'Invalid email format.';
+        valid = false;
+      }
+
+      if (!password) {
+        passwordError.textContent = 'Password is required.';
+        valid = false;
+      } else if (password.length < 6) {
+        passwordError.textContent = 'Password must be at least 6 characters.';
+        valid = false;
+      }
+
+      if (valid) {
+        alert(`Email: ${email}\nPassword: ${password}`);
+      }
+    });
+  </script>
+
+</body>
+</html>
